@@ -10,5 +10,36 @@ package net.notfab.hubbasics;
  * https://creativecommons.org/licenses/by-nc-sa/4.0/
  */
 
-public class HubBasics {
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import lombok.Getter;
+
+import java.io.File;
+import java.io.IOException;
+
+public class HubBasics extends JavaPlugin {
+    @Getter private static HubBasics instance;
+    @Getter private static FileConfiguration configuration;
+
+    public static void saveConfiguration() {
+        HubBasics.getInstance().saveConfig();
+    }
+
+    public static void reloadConfiguration() {
+        HubBasics.getInstance().reloadConfig();
+    }
+
+    public void onEnable() {
+        instance = this;
+
+        this.saveDefaultConfig();
+        configuration = this.getConfig();
+    }
+
+    public void onDisable() {
+
+        instance = null;
+    }
 }
